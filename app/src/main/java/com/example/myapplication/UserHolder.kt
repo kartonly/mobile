@@ -30,12 +30,28 @@ object UserHolder {
     }
 
 
-    fun registerUserByPhone(fullName: String, rawPhone: String): User {
-        TODO()
+    fun registerUserByPhone(
+        fullName: String,
+        rawPhone: String
+    ): User {
+        return User.makeUser(fullName, phone = rawPhone)
+            .also { user ->
+                if (map.containsKey(user.login)) throw IllegalArgumentException("User already exists")
+                else map[user.login] = user
+        }
     }
 
     fun requestAccessCode(login: String) {
-        TODO()
+        val loginPhone = cleanPhone(login)
+        val user = map[loginPhone]
+
+        if (user != null) {
+            val accessCode = user.generateAccessCode()
+            user.accessCode = accessCode;
+            user.sendAccessCodeToUser(login,accessCode)
+            map[loginPhone] = user
+        }
+
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
