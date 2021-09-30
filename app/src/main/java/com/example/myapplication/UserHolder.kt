@@ -37,7 +37,9 @@ object UserHolder {
         return User.makeUser(fullName, phone = rawPhone)
             .also { user ->
                 if (map.containsKey(user.login)) throw IllegalArgumentException("User already exists")
-                else map[user.login] = user
+                if (cleanPhone(rawPhone).matches("^\\+?[0-9]{3}-?[0-9]{6,12}\$".toRegex()))
+                    map[user.login] = user
+                else throw IllegalArgumentException("Phone is incorrect")
         }
     }
 
@@ -47,7 +49,8 @@ object UserHolder {
 
         if (user != null) {
             val accessCode = user.generateAccessCode()
-            user.accessCode = accessCode;
+            user.accessCode = accessCode
+            user.passwordHash = user.encrypt(accessCode)
             user.sendAccessCodeToUser(login,accessCode)
             map[loginPhone] = user
         }
