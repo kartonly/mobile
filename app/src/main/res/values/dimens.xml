@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="d8">8dp</dimen>
+    <dimen name="d16">16dp</dimen>
+    <dimen name="d72">72dp</dimen>
+    <dimen name="d64">64dp</dimen>
+    <dimen name="d24">24dp</dimen>
+    <dimen name="d14">14dp</dimen>
+    <dimen name="d10">10dp</dimen>
+    <dimen name="d20">20dp</dimen>
+    <dimen name="headH">56dp</dimen>
+    <dimen name="searchH">40dp</dimen>
+    <dimen name="exit">40dp</dimen>
+    <dimen name="cardH">178dp</dimen>
+    <dimen name="LCardH">159dp</dimen>
+    <dimen name="d12">12dp</dimen>
+
+    <dimen name="t16">16sp</dimen>
+    <dimen name="t10">10sp</dimen>
+    <dimen name="t14">14sp</dimen>
+</resources>

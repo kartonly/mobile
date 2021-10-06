@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MyApplication2</string>
+    <string name="page_name">Notifications</string>
+    <string name="p1">Roman Kamushken</string>
+    <string name="days2">2 days ago</string>
+    <string name="rep117">117 REPLAYS</string>
+    <string name="p2">Tina Turbina</string>
+    <string name="p3">Tomek Kuwalskij</string>
+    <string name="min18">18 minutes ago</string>
+    <string name="text2">“into component container and with resizing constraints set????”</string>
+    <string name="text1">Check out awesome updates for Android design kit for Figma. Now more screens and more categories.</string>
+</resources>
