@@ -20,11 +20,21 @@
             android:hint="@string/edittext1" />
 
         <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/edit_text1"
+            android:text="@string/back"
+            tools:ignore="MissingConstraints" />
+
+        <Button
             android:id="@+id/next"
+            android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/edit_text1"
             android:text="@string/go"
+            app:layout_constraintStart_toEndOf="@+id/back"
             tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

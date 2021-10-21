@@ -9,6 +9,7 @@ import com.example.lesson3.databinding.ActivityMainBinding
 interface ActivityCollback{
     fun showNextFragment(x: Int)
     fun showBackFragment(x: Int)
+    fun Exit()
 }
 
 class MainActivity : AppCompatActivity(), ActivityCollback{
@@ -63,6 +64,11 @@ class MainActivity : AppCompatActivity(), ActivityCollback{
     override fun showBackFragment(x: Int) {
         supportFragmentManager.beginTransaction().replace(R.id.fragments, fragmentList[x - 2]).commit()
         butdestroy(x-1)
+    }
+
+    override fun Exit() {
+        finishAffinity()
+        System.exit(0);
     }
 
 }

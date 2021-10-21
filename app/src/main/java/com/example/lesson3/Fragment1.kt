@@ -16,6 +16,7 @@ class Fragment1 : Fragment() {
         binding = Fragment1Binding.inflate(layoutInflater)
         val view = binding.root
         nextButtonClick()
+            backButtonClick()
         return view
     }
 
@@ -24,6 +25,12 @@ class Fragment1 : Fragment() {
             val activityCollback = requireActivity() as ActivityCollback
             Calculator.num1 = binding.editText1.text.toString().toInt()
             activityCollback.showNextFragment(x)
+        }
+    }
+    private fun backButtonClick(){
+        binding.back.setOnClickListener{
+            val activityCollback = requireActivity() as ActivityCollback
+            activityCollback.Exit()
         }
     }
 
