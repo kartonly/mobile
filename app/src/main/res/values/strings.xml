@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">lesson4</string>
+    <string name="people">Личности</string>
+    <string name="edittext">Поиск</string>
+    <string name="go">Поискать</string>
+</resources>
