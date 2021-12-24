@@ -1,8 +1,11 @@
 package com.example.lesson4
 
+import android.os.AsyncTask
 import androidx.annotation.DrawableRes
+import java.util.concurrent.TimeUnit
 
 data class Persons(
+    val id: Int,
     val name: String,
     val years: String,
     val cuts: String,
@@ -13,6 +16,9 @@ data class Persons(
 typealias activityListener = () -> Unit
 
 object PersonHolder {
+    private val id = arrayOf(
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+    )
     private val Name = arrayOf(
         "Джим Керри",
         "Альберт Эйнштейн",
@@ -83,6 +89,7 @@ object PersonHolder {
     fun createCollectionPersons(): ArrayList<Persons>{
         for (i in 0..9){
             val person = Persons(
+                id[i],
                 Name[i],
                 Years[i],
                 Cuts[i],
@@ -102,5 +109,35 @@ object PersonHolder {
 
     fun addListener(listener: activityListener) {
         listeners.add(listener)
+    }
+
+    var curEl = 0
+    class AsTask() : AsyncTask<Void,  Void, Void>() {
+        private fun printTextInTextView(i: Int): ArrayList<Persons>{
+            val person = Persons(
+                id[i],
+                Name[i],
+                Years[i],
+                Cuts[i],
+                Sex[i],
+                Photos[i]
+            )
+            persons.add(person)
+            return persons
+        }
+
+        override fun onProgressUpdate(vararg values: Void?) {
+            super.onProgressUpdate()
+            printTextInTextView(curEl)
+            curEl++
+        }
+
+        override fun doInBackground(vararg p0: Void?): Void? {
+            for (i in 0..9) {
+                TimeUnit.SECONDS.sleep(2)
+                publishProgress()
+            }
+            return null
+        }
     }
 }

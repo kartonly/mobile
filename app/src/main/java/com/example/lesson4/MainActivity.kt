@@ -1,5 +1,6 @@
 package com.example.lesson4
 
+import android.annotation.SuppressLint
 import android.app.Person
 import android.content.Context
 import android.os.AsyncTask
@@ -17,35 +18,38 @@ import com.example.lesson4.PersonHolder
 import java.util.ArrayList
 import java.util.Calendar.getAvailableLocales
 import java.util.concurrent.TimeUnit
-import android.R
 import android.view.View
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
     var curEl = 0
+    lateinit var context: Context
     var mInfoTextView: TextView? = null
+    var linearLayout: LinearLayout? = null
 
-    var Data = arrayOf("Eins", "Zwei")
+    var Data = arrayOf("Eins", "Zwei", "Три", "Четыре", "Пять", "Шесть")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        mInfoTextView = findViewById(R.id.text);
+        setContentView(R.layout.activity_main)
+        context = this
+//        mInfoTextView = findViewById(R.id.text);
+        linearLayout = findViewById(R.id.text)
         AsTask().execute()
     }
 
+    @SuppressLint("StaticFieldLeak")
     inner class AsTask() : AsyncTask<Void, Void, Void>() {
         private fun onPostExecute(text: String){
-            mInfoTextView?.setText(text)
+            val textView = TextView(context)
+            textView.setText(text)
+            linearLayout?.addView(textView)
         }
 
         override fun doInBackground(vararg p: Void?): Void? {
             for (i in Data) {
-                TimeUnit.SECONDS.sleep(5)
+                TimeUnit.SECONDS.sleep(2)
                 publishProgress()
             }
             return null

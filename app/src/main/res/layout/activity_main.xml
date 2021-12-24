@@ -57,7 +57,7 @@
         android:text="@string/go"
         tools:ignore="MissingConstraints" />
 
-    <TextView
+    <LinearLayout
         android:id="@+id/text"
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_text">
 
-    </TextView>
+    </LinearLayout>
 
 <!--    <androidx.recyclerview.widget.RecyclerView-->
 <!--        android:id="@+id/card_person"-->
