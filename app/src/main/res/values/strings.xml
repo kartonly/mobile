@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">lesson4</string>
+    <string name="add_relation">Добавить отношение</string>
+    <string name="children">Ребенок</string>
+    <string name="parent">Родитель</string>
+    <string name="plusChar">Новая запись</string>
+    <string name="cancel">закрыть</string>
+    <string name="addLabel">Добавить запись</string>
+    <string name="add">Добавить</string>
+    <string name="delete">Удалить</string>
+</resources>
