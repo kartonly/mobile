@@ -4,17 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.lesson1s2.data.CurrencyApi
+import com.example.lesson1s2.data.CurrencyRepository
 import com.example.lesson1s2.ui.main.MainFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.coroutines.CoroutineContext
 import okhttp3.OkHttpClient
 
 import okhttp3.logging.HttpLoggingInterceptor
-
 
 
 
@@ -29,22 +30,11 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
         }
-
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-
-        val retrofit = Retrofit.Builder()
-            .client(client)
-            .baseUrl("http://data.fixer.io/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(CurrencyApi::class.java)
-
-        GlobalScope.launch(Dispatchers.IO as CoroutineContext){
-            val cur = service.getCurrencies()
-            Log.d("MY_TAG","$cur")
+        main()
+    }
+    fun main() = runBlocking { // this: CoroutineScope
+        launch { // launch a new coroutine and continue
+            return@launch CurrencyRepository().getRemoteSource()
         }
     }
 }
