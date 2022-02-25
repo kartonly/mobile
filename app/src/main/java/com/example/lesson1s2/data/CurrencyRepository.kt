@@ -4,7 +4,7 @@ import com.example.lesson1s2.data.sources.RemoteDataSource
 
 class CurrencyRepository {
 
-    suspend fun getRemoteSource(){
+    suspend fun getAll(){
         return RemoteDataSource().getSource()
     }
 }

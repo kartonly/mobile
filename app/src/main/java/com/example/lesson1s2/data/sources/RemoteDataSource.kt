@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.lesson1s2.data.CurrencyApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,10 +26,17 @@ class RemoteDataSource {
 
             val service = retrofit.create(CurrencyApi::class.java)
 
-            GlobalScope.launch(Dispatchers.IO as CoroutineContext){
-                val cur = service.getCurrencies()
-                Log.d("MY_TAG","$cur")
-//                return@launch cur
+            suspend fun getValues() = coroutineScope{
+                launch(Dispatchers.IO as CoroutineContext){
+                    val cur = service.getCurrencies()
+                    Log.d("MY_TAG","$cur")
+                }
             }
+            getValues()
+
+//            GlobalScope.launch(Dispatchers.IO as CoroutineContext){
+//                val cur = service.getCurrencies()
+//                Log.d("MY_TAG","$cur")
+//            }
         }
 }
