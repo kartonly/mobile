@@ -19,7 +19,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity(private val CurrencyRepository: CurrencyRepository) : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,9 @@ class MainActivity : AppCompatActivity() {
     }
     fun main() = runBlocking { // this: CoroutineScope
         launch { // launch a new coroutine and continue
-            return@launch CurrencyRepository().getAll()
+            val cur = CurrencyRepository.getAll()
+            Log.d("MY_TAG", "$cur")
         }
     }
+
 }
