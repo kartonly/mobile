@@ -1,14 +1,14 @@
 package com.example.lesson1s2.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lesson1s2.data.sources.RemoteDataSource
 import kotlinx.coroutines.Job
 
-class CurrencyRepository {
+class CurrencyRepository(private val remoteData: RemoteDataSource = RemoteDataSource()) {
 
-    suspend fun getAll(): MutableLiveData<CurrencyResponse> {
-        RemoteDataSource().getSource()
-        return RemoteDataSource().result
+    suspend fun getAll(): CurrencyResponse{
+        return remoteData.getSource()
     }
 }
