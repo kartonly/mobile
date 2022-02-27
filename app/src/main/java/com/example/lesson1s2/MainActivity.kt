@@ -3,9 +3,11 @@ package com.example.lesson1s2
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.ViewModelProviders
 import com.example.lesson1s2.data.CurrencyApi
 import com.example.lesson1s2.data.CurrencyRepository
 import com.example.lesson1s2.ui.main.MainFragment
+import com.example.lesson1s2.ui.main.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -19,8 +21,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 
 
-class MainActivity(private val CurrencyRepository: CurrencyRepository) : AppCompatActivity() {
-
+class MainActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
@@ -29,13 +30,7 @@ class MainActivity(private val CurrencyRepository: CurrencyRepository) : AppComp
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
         }
-        main()
-    }
-    fun main() = runBlocking { // this: CoroutineScope
-        launch { // launch a new coroutine and continue
-            val cur = CurrencyRepository.getAll()
-            Log.d("MY_TAG", "$cur")
-        }
+        val model = ViewModelProviders.of(this).get(MainViewModel::class.java).main()
     }
 
 }
