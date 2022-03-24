@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="top">56dp</dimen>
+    <dimen name="back">40dp</dimen>
+    <dimen name="top24">24dp</dimen>
+    <dimen name="top16">16dp</dimen>
+    <dimen name="cardH">178dp</dimen>
+    <dimen name="m8">8dp</dimen>
+    <dimen name="icon">40dp</dimen>
+    <dimen name="m12">12dp</dimen>
+    <dimen name="m6">6dp</dimen>
+    <dimen name="m10">10dp</dimen>
+    <dimen name="m18">18dp</dimen>
+
+    <dimen name="f20">20sp</dimen>
+    <dimen name="f16">16sp</dimen>
+    <dimen name="f14">14sp</dimen>
+    <dimen name="f10">10sp</dimen>
+    <dimen name="f12">12sp</dimen>
+</resources>

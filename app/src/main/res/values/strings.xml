@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">lesson1s2</string>
+    <string name="values">Валюты</string>
+    <string name="history">История</string>
+    <string name="rise">Рост валют</string>
+    <string name="val1">Введите кол-во</string>
+    <string name="exchange">Обменять</string>
+    <string name="filter">Фильтры</string>
+    <string name="date">Выберите период</string>
+    <string name="alltime">Весь период</string>
+    <string name="week">Неделя</string>
+    <string name="month">Месяц</string>
+    <string name="date2">Введите период самостоятельно:</string>
+    <string name="start">Начало</string>
+    <string name="end">Конец</string>
+    <string name="choose">Выбрать</string>
 </resources>

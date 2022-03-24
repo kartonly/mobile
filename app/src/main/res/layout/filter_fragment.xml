@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/filter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/m18"
+        android:layout_marginStart="@dimen/top16"
+        android:layout_marginEnd="@dimen/top16"
+        android:textSize="@dimen/f20"
+        android:textColor="@color/greyL"
+        android:text="@string/date"
+        />
+
+    <Button
+        android:id="@+id/button1"
+        android:text="@string/alltime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button2"/>
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/date"
+        app:layout_constraintLeft_toRightOf="@id/button1"
+        app:layout_constraintRight_toLeftOf="@id/button3"
+        android:text="@string/month" />
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/date"
+        app:layout_constraintLeft_toRightOf="@id/button2"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/week" />
+
+    <TextView
+        android:id="@+id/dateOr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/button1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/m18"
+        android:layout_marginStart="@dimen/top16"
+        android:layout_marginEnd="@dimen/top16"
+        android:textSize="@dimen/f20"
+        android:textColor="@color/greyL"
+        android:text="@string/date2"
+        />
+
+    <EditText
+        android:id="@+id/edit_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/dateOr"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:inputType="number"
+        android:layout_marginStart="@dimen/top16"
+        android:hint="@string/start" />
+
+    <EditText
+        android:id="@+id/edit_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/edit_start"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:inputType="number"
+        android:layout_marginStart="@dimen/top16"
+        android:hint="@string/end" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/edit_end"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/choose" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
