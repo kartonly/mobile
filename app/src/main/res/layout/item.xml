@@ -52,18 +52,19 @@
         </TextView>
 
 
-        <Button
+        <ImageButton
             android:id="@+id/like"
             android:layout_width="@dimen/top24"
             android:layout_height="@dimen/top24"
             android:layout_marginTop="@dimen/m6"
             android:layout_marginEnd="@dimen/m12"
-            android:background="@drawable/fav"
+            android:src="@drawable/fav"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/cut"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck">
 
-        </Button>
+        </ImageButton>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

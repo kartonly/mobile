@@ -4,6 +4,8 @@
     <string name="history">История</string>
     <string name="rise">Рост валют</string>
     <string name="val1">Введите кол-во</string>
+    <string name="one">1</string>
+    <string name="rub">RUB</string>
     <string name="exchange">Обменять</string>
     <string name="filter">Фильтры</string>
     <string name="date">Выберите период</string>

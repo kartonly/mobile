@@ -19,6 +19,10 @@ import kotlin.coroutines.CoroutineContext
 import okhttp3.OkHttpClient
 
 import okhttp3.logging.HttpLoggingInterceptor
+import android.widget.Toast
+
+
+
 
 
 
@@ -33,7 +37,19 @@ class MainActivity() : AppCompatActivity() {
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
         }
+        onBackPressed()
         val model = ViewModelProviders.of(this).get(MainViewModel::class.java).main()
+    }
+
+    private var back_pressed: Long = 0
+
+    override fun onBackPressed() {
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed()
+        } else {
+            Toast.makeText(baseContext, "Нажмите еще раз, чтобы выйти", Toast.LENGTH_SHORT).show()
+        }
+        back_pressed = System.currentTimeMillis()
     }
 
 }
