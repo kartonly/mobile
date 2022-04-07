@@ -34,8 +34,7 @@
         android:layout_marginBottom="@dimen/top16"
         android:paddingStart="@dimen/m8"
         android:paddingEnd="@dimen/m8"
-        tools:itemCount="5"
-        tools:listitem="@layout/item"
+        tools:listitem="@layout/item_history"
         tools:ignore="MissingConstraints"
         app:layout_constraintTop_toBottomOf="@+id/filter"/>
 

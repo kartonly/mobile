@@ -16,7 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class ValuesFragment: Fragment() {
+class ValuesFragment(private var viewModel: MainViewModel): Fragment() {
     private lateinit var binding: ValuesFragmentBinding
 
     private val verticalLinearLayoutManager: LinearLayoutManager =
@@ -51,7 +51,7 @@ class ValuesFragment: Fragment() {
     }
 
     private  fun showSnackbarVal(value: String, currency: Double): Unit{
-        fragmentManager?.beginTransaction()?.replace(R.id.main_container, ExchangeFragment(value, currency), ExchangeFragment::class.java.simpleName)
+        fragmentManager?.beginTransaction()?.replace(R.id.main_container, ExchangeFragment(viewModel, value, currency), ExchangeFragment::class.java.simpleName)
             ?.commit()
     }
 
