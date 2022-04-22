@@ -11,14 +11,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
 import com.example.lesson1s2.data.database.Values
+import java.sql.Timestamp
 import java.time.LocalDate
-import java.util.*
+import java.time.LocalDateTime
 
 
 class ExchangeFragment(private var viewModel: MainViewModel, private val value: String, private val currency: Double): Fragment() {
     private lateinit var binding: ExchangeFragmentBinding
     var final: Double = 0.0
-    var Add = 0
 
     private fun insertValueInDB(viewModel: MainViewModel, values: Values){
         viewModel.insertValue(values)
@@ -48,8 +48,7 @@ class ExchangeFragment(private var viewModel: MainViewModel, private val value: 
         })
 
         binding.button2.setOnClickListener{
-            Add += 1
-            val id = (1..1000000000).random()
+            val id = System.currentTimeMillis().toInt()
             val values = Values(id, value, currency, final, LocalDate.now().toString())
 
             insertValueInDB(viewModel, values)

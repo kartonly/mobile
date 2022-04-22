@@ -8,7 +8,6 @@ class ValuesRepository(private val valuesDao: ValuesDao) {
 
     var getAllValues = valuesDao.getAllValues();
     suspend fun insertValue(values: Values){
-        valuesDao.insertNode(values)
+        valuesDao.insertValue(values)
     }
-
 }

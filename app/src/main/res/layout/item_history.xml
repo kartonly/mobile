@@ -14,7 +14,6 @@
         android:paddingStart="@dimen/top16"
         android:paddingEnd="@dimen/top16"
         android:paddingBottom="@dimen/m12"
-        android:background="@color/purple_000"
         tools:ignore="MissingConstraints"
         >
 

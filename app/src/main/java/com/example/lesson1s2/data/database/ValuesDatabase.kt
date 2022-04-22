@@ -1,18 +1,16 @@
-package com.example.lesson4.database.databases
+package com.example.lesson1s2.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.lesson1s2.data.database.Converters
-import com.example.lesson1s2.data.database.Values
-import com.example.lesson1s2.data.database.ValuesDao
 
-@Database(entities = [Values::class], version = 1)
+@Database(entities = [Values::class, ValuesLiked::class], version = 3)
 @TypeConverters(Converters::class)
 abstract class ValuesDB: RoomDatabase() {
     abstract fun ValuesDao(): ValuesDao
+    abstract fun ValuesLikedDao(): ValuesLikedDao
 
     companion object {
         @Volatile
@@ -25,6 +23,7 @@ abstract class ValuesDB: RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     ValuesDB::class.java, "values_database")
+                    .fallbackToDestructiveMigration()
                     .build()
                 db = instance
                 return instance

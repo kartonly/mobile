@@ -14,5 +14,6 @@ interface ValuesDao {
     @Query("SELECT * FROM `Values`")
     fun getAllValues():  Flow<MutableList<Values>>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNode(values: Values)
+    suspend fun insertValue(values: Values)
+
 }

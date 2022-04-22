@@ -29,7 +29,7 @@ class FilterFragment(private var viewModel: MainViewModel): Fragment() {
         binding.button2.setOnClickListener(){
             var dateMonth: String = "01"
             val date = LocalDate.now().toString()
-            dateMonth = date[8].toString()+date[9].toString()
+            dateMonth = date[5].toString()+date[6].toString()
 
             fragmentManager?.beginTransaction()?.replace(R.id.main_container, HistoryFragment(viewModel, dateMonth), HistoryFragment::class.java.simpleName)
                 ?.commit()

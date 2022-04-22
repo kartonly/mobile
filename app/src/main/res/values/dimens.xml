@@ -3,6 +3,7 @@
     <dimen name="top">56dp</dimen>
     <dimen name="back">40dp</dimen>
     <dimen name="top24">24dp</dimen>
+    <dimen name="top29">29dp</dimen>
     <dimen name="top16">16dp</dimen>
     <dimen name="cardH">178dp</dimen>
     <dimen name="m8">8dp</dimen>
@@ -12,6 +13,7 @@
     <dimen name="m10">10dp</dimen>
     <dimen name="m18">18dp</dimen>
 
+    <dimen name="f28">28sp</dimen>
     <dimen name="f20">20sp</dimen>
     <dimen name="f16">16sp</dimen>
     <dimen name="f14">14sp</dimen>

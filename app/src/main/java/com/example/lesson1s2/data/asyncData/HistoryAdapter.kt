@@ -14,21 +14,9 @@ class HistoryAdapter(private val values: MutableList<Values>, private val filter
     inner class HistoryHolder internal constructor(private val binding: ItemHistoryBinding): RecyclerView.ViewHolder(binding.root)
     {
         fun bind(history: Values) = binding.run{
-            if (filter == no){
-                cut.text = history.value+" по курсу "+history.cost
-                valueName.text = "Итого:"+history.finalCost
-                date.text = history.date
-            }
-            if (filter != no){
-                val month: String
-                month = history.date[8].toString()+history.date[9].toString()
-
-                if (month == filter){
-                    cut.text = history.value+" по курсу "+history.cost
-                    valueName.text = "Итого:"+history.finalCost
-                    date.text = history.date
-                }
-            }
+            cut.text = history.value+" по курсу "+history.cost
+            valueName.text = "Итого:"+history.finalCost
+            date.text = history.date
         }
     }
 
@@ -45,7 +33,14 @@ class HistoryAdapter(private val values: MutableList<Values>, private val filter
     override fun onBindViewHolder(holder: HistoryHolder, position: Int) {
         val histories: MutableList<Values> = values
         val history = histories[position]
-        holder.bind(history)
+        if (filter == no){
+            holder.bind(history)
+        } else {
+            val month: String
+            month = history.date[5].toString()+history.date[6].toString()
+
+            if (month == filter){ holder.bind(history) }
+        }
     }
 
 }

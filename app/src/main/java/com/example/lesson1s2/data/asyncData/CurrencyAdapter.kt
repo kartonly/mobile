@@ -6,37 +6,44 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lesson1s2.R
 import com.example.lesson1s2.data.CurrencyResponse
+import com.example.lesson1s2.data.models.Currency
 import com.example.lesson1s2.databinding.ItemBinding
 import com.example.lesson1s2.ui.main.ValuesFragment
 
-class CurrencyAdapter(private val rates:Map<String,Double>,
-                      private val clickLike: (String, Int)->Unit,
+class CurrencyAdapter(private val rates:MutableList<Currency>,
+                      private val clickLike: (Currency)->Unit,
                       private val clickVal: (String, Double)->Unit): RecyclerView.Adapter<CurrencyAdapter.CurrencyHolder>()  {
 
-    inner class CurrencyHolder internal constructor(
+
+    class CurrencyHolder constructor(
         private val binding: ItemBinding,
-        private val clickLike: (String, Int)->Unit,
-        private val clickVal: (String, Double)->Unit): RecyclerView.ViewHolder(binding.root){
+        private val clickLike: (Currency) -> Unit,
+        private val clickVal: (String, Double) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        var count = 0
-        fun bind(currency: Pair<String, Double>) = binding.run{
-            name.text = currency.first
-            cut.text = currency.second.toString()
+        fun bind(currency: Currency) = binding.run {
+            name.text = currency.name
+            cut.text = currency.value.toString()
+            like.setBackgroundResource(currency.icon)
 
-            binding.like.setOnClickListener{
-                if(count==1){
-                    count--
-                    clickLike(currency.first, count)
-                    like.setBackgroundResource(R.drawable.fav)
+            var count = 0
+            binding.like.setOnClickListener {
+
+                if (count == 0){
+                    currency.icon = R.drawable.outline_favorite_24
+                    like.setBackgroundResource(currency.icon)
+                    clickLike.invoke(currency)
+                    count = 1
                 } else {
-                    count++
-                    clickLike(currency.first, count)
-                    like.setBackgroundResource(R.drawable.outline_favorite_24)
+                    currency.icon = R.drawable.fav
+                    like.setBackgroundResource(currency.icon)
+                    clickLike.invoke(currency)
+                    count = 0
                 }
-            }
 
-            binding.name.setOnClickListener{
-                clickVal(currency.first, currency.second)
+            }
+            binding.name.setOnClickListener {
+                clickVal(currency.name, currency.value)
             }
         }
     }
@@ -46,8 +53,9 @@ class CurrencyAdapter(private val rates:Map<String,Double>,
         return CurrencyHolder(binding, clickLike, clickVal)
     }
     override fun onBindViewHolder(holder: CurrencyHolder, position: Int) {
-       val currencies: List<Pair<String, Double>> = rates.toList()
+       val currencies: MutableList<Currency> = rates
        val currency = currencies[position]
+
        holder.bind(currency)
    }
 

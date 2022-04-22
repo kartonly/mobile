@@ -35,9 +35,9 @@ class HistoryFragment(private var viewModel: MainViewModel, private val date: St
 
     fun setupRecycleView() {
         binding.card.layoutManager = verticalLinearLayoutManager
-        val values = viewModel.getAllNodes
+        val values = viewModel.getAllValues
 
-        viewModel.getAllNodes.observe(viewLifecycleOwner) { values ->
+        viewModel.getAllValues.observe(viewLifecycleOwner) { values ->
             binding.card.adapter = HistoryAdapter(values, date) }
 
     }

@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lesson1s2.R
 import com.example.lesson1s2.data.asyncData.CurrencyAdapter
 import com.example.lesson1s2.data.asyncData.CurrencyHolder
+import com.example.lesson1s2.data.database.Values
+import com.example.lesson1s2.data.database.ValuesLiked
+import com.example.lesson1s2.data.models.Currency
 import com.example.lesson1s2.databinding.ExchangeFragmentBinding
 import com.example.lesson1s2.databinding.ValuesFragmentBinding
 import com.google.android.material.snackbar.Snackbar
@@ -18,6 +21,14 @@ import kotlinx.coroutines.runBlocking
 
 class ValuesFragment(private var viewModel: MainViewModel): Fragment() {
     private lateinit var binding: ValuesFragmentBinding
+
+    ///db(liked)
+    private fun insertLiked(viewModel: MainViewModel, value: ValuesLiked){
+        viewModel.insertLiked(value)
+    }
+    private fun deleteLiked(viewModel: MainViewModel, value: ValuesLiked){
+        viewModel.deleteLiked(value)
+    }
 
     private val verticalLinearLayoutManager: LinearLayoutManager =
         LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
@@ -38,15 +49,23 @@ class ValuesFragment(private var viewModel: MainViewModel): Fragment() {
 
     suspend fun setupRecycleView() {
         binding.card.layoutManager = verticalLinearLayoutManager
-        binding.card.adapter = CurrencyAdapter(CurrencyHolder.getCur(), ::showSnackbarLike, ::showSnackbarVal)
+
+//        viewModel.getAllLiked.observe(viewLifecycleOwner) { values ->
+//            binding.card.adapter = CurrencyAdapter(viewModel.getCur(), ::showSnackbarLike, ::showSnackbarVal) }
+
+        binding.card.adapter = CurrencyAdapter(viewModel.getCur(), ::showSnackbarLike, ::showSnackbarVal)
     }
 
-    private  fun showSnackbarLike(value: String, count: Int): Unit{
-        if (count==0){
-            Snackbar.make(binding.root, "Валюта " + value + " убрана из избранного", 3000).show()
+    private  fun showSnackbarLike(value: Currency): Unit{
+        if (value.icon == R.drawable.fav){
+            val like = ValuesLiked(value.name, R.drawable.outline_favorite_24)
+            deleteLiked(viewModel, like)
+            Snackbar.make(binding.root, "Валюта " + value.name + " убрана из избранного", 3000).show()
         }
-        if (count==1){
-            Snackbar.make(binding.root, "Валюта " + value + " добавлена в избранное", 3000).show()
+        if (value.icon == R.drawable.outline_favorite_24){
+            val like = ValuesLiked(value.name, R.drawable.outline_favorite_24)
+            insertLiked(viewModel, like)
+            Snackbar.make(binding.root, "Валюта " + value.name + " добавлена в избранное", 3000).show()
         }
     }
 

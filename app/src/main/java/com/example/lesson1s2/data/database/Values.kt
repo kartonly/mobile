@@ -8,8 +8,7 @@ import java.util.*
 
 @Entity
 data class Values(
-    @PrimaryKey(autoGenerate = true) @NonNull
-    val id: Int,
+    @PrimaryKey(autoGenerate = true) @NonNull val id: Int,
     var value: String,
     val cost: Double,
     val finalCost: Double,
