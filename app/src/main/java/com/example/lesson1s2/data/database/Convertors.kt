@@ -6,11 +6,8 @@ import java.time.LocalDate
 import java.util.*
 
 class Converters {
-    @TypeConverter
-    fun toJsonValue(value: String): String {
-        return Gson().toJson(value)
-    }
 
     @TypeConverter
-    fun toList(value: String) = Gson().fromJson(value, Array<Values>::class.java).toMutableList()
+    fun toList(savedValues: SavedValues) = Gson().fromJson(savedValues.value, Array<SavedValues>::class.java).toList()
+
 }

@@ -6,11 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [Values::class, ValuesLiked::class], version = 3)
+@Database(entities = [Values::class, SavedValues::class], version = 6)
 @TypeConverters(Converters::class)
 abstract class ValuesDB: RoomDatabase() {
     abstract fun ValuesDao(): ValuesDao
-    abstract fun ValuesLikedDao(): ValuesLikedDao
+    abstract fun SavedValuesDao(): SavedValuesDao
 
     companion object {
         @Volatile

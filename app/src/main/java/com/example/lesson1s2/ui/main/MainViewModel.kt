@@ -1,23 +1,38 @@
 package com.example.lesson1s2.ui.main
 
 import android.app.Application
+import android.content.SharedPreferences
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.lesson1s2.DependencyInjection
 import com.example.lesson1s2.R
 import com.example.lesson1s2.data.CurrencyResponse
 import com.example.lesson1s2.data.asyncData.CurrencyHolder
-import com.example.lesson1s2.data.database.Values
-import com.example.lesson1s2.data.database.ValuesLiked
-import com.example.lesson1s2.data.database.ValuesLikedRepository
-import com.example.lesson1s2.data.database.ValuesRepository
+import com.example.lesson1s2.data.asyncData.HistoryAdapter
+import com.example.lesson1s2.data.database.*
 import com.example.lesson1s2.data.models.Currency
-import com.example.lesson1s2.data.database.ValuesDB
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.sql.Time
+import java.time.LocalTime
 
 class MainViewModel(application: Application) : ViewModel() {
+    var oldTime = 0
+    var prefs: SharedPreferences? = null
+    var sharedEditor: SharedPreferences.Editor? = null
+    public fun isFirstStart(): Boolean? {
+        if (prefs?.getBoolean("firstrun", true) == true) {
+            // Do first run stuff here then set 'firstrun' as false
+            // using the following line to edit/commit prefs
+            prefs!!.edit().putBoolean("firstrun", false).commit();
+            return true
+        }else {
+            return false
+        }
+    }
+
     ///data from api
     val data = MutableLiveData<CurrencyResponse>()
     val valuesList: MutableList<Currency> = mutableListOf()
@@ -26,48 +41,67 @@ class MainViewModel(application: Application) : ViewModel() {
     private val repository: ValuesRepository
     val getAllValues: LiveData<MutableList<Values>>
 
-    ///values(liked) from db
-    private val repositoryLiked: ValuesLikedRepository
-    val getAllLiked: LiveData<MutableList<ValuesLiked>>
+    ///values(history) from db
+    private val savedRepository: SavedValuesRepository
+    val getAllSavedValues: LiveData<MutableList<SavedValues>>
 
     ///insert values(history) into db
     public fun insertValue(values: Values)
             = viewModelScope.launch(Dispatchers.IO) { repository.insertValue(values) }
 
-    ///insert values(liked) into db
-    public fun insertLiked(value: ValuesLiked)
-            = viewModelScope.launch(Dispatchers.IO) { repositoryLiked.insertLiked(value) }
+    ///insert values(saved) into db
+    public fun insertSavedValue(savedValues: SavedValues)
+            = viewModelScope.launch(Dispatchers.IO) { savedRepository.insertSaved(savedValues) }
 
-    ///delete values(liked) from db
-    public fun deleteLiked(value: ValuesLiked)
-            = viewModelScope.launch(Dispatchers.IO) { repositoryLiked.deleteLiked(value) }
+    ///update values(saved) in db
+    public fun updateSavedValue(savedValues: SavedValues)
+            = viewModelScope.launch(Dispatchers.IO) { savedRepository.updateSaved(savedValues) }
+
+    ///update cost(saved) in db
+    public fun updateCost(value: String, cost: Double)
+            = viewModelScope.launch(Dispatchers.IO) { savedRepository.updateCost(value, cost) }
 
     init {
         val valuesDao = ValuesDB.getDatabase(application).ValuesDao()
         repository = ValuesRepository(valuesDao)
         getAllValues = repository.getAllValues.asLiveData()
 
-        val valuesLikedDao = ValuesDB.getDatabase(application).ValuesLikedDao()
-        repositoryLiked = ValuesLikedRepository(valuesLikedDao)
-        getAllLiked = repositoryLiked.getAllLiked.asLiveData()
+        val savedValuesDao = ValuesDB.getDatabase(application).SavedValuesDao()
+        savedRepository = SavedValuesRepository(savedValuesDao)
+        getAllSavedValues = savedRepository.getAllSavedValues.asLiveData()
     }
 
+//    ///get values from api
+//    suspend fun getCur(): MutableList<Currency>{
+//        val rates = CurrencyHolder.getCur().toList()
+//        for (i in rates){
+//            valuesList.add(Currency(i.first, i.second, R.drawable.fav))
+//        }
+//        return valuesList
+//    }
 
-    ///log values from api
-    fun main() = runBlocking { // this: CoroutineScope
-        launch { // launch a new coroutine and continue
-            val cur = DependencyInjection.repository.getAll()
-            data.postValue(cur)
-            Log.d("MY_TAG", "$data")
+    suspend fun changeValues() {
+        if (isFirstStart() == true){
+            firstStart()
+        }
+
+        var time = System.currentTimeMillis().toInt()
+        if ((time - oldTime)>300000){
+            val rates = CurrencyHolder.getCur().toList()
+            for (i in rates){
+                updateCost(i.first, i.second)
+            }
+            oldTime = time
         }
     }
 
-    ///get values from api
-    suspend fun getCur(): MutableList<Currency>{
+    suspend fun firstStart(){
         val rates = CurrencyHolder.getCur().toList()
         for (i in rates){
-            valuesList.add(Currency(i.first, i.second, R.drawable.fav))
+            var save = SavedValues(i.first, i.second, false)
+            insertSavedValue(save)
         }
-        return valuesList
     }
+
 }
+
