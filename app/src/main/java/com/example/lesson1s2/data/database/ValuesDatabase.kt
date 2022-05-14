@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [Values::class, SavedValues::class], version = 6)
+@Database(entities = [Values::class, SavedValues::class], version = 8)
 @TypeConverters(Converters::class)
 abstract class ValuesDB: RoomDatabase() {
     abstract fun ValuesDao(): ValuesDao

@@ -40,14 +40,30 @@ class MainViewModel(application: Application) : ViewModel() {
     ///values(history) from db
     private val repository: ValuesRepository
     val getAllValues: LiveData<MutableList<Values>>
+    val getByMonth: LiveData<MutableList<Values>>
+    val getByWeek: LiveData<MutableList<Values>>
+    lateinit var getByValue: LiveData<MutableList<Values>>
+    lateinit var getBetween: LiveData<MutableList<Values>>
 
-    ///values(history) from db
+    ///values(saved) from db
     private val savedRepository: SavedValuesRepository
     val getAllSavedValues: LiveData<MutableList<SavedValues>>
 
     ///insert values(history) into db
     public fun insertValue(values: Values)
             = viewModelScope.launch(Dispatchers.IO) { repository.insertValue(values) }
+
+    ///get values(history) from db by value name
+    public fun getByValue(value: String): LiveData<MutableList<Values>> {
+        getByValue = repository.getByValue(value).asLiveData()
+        return getByValue
+    }
+
+    ///get values(history) from db by value name
+    public fun getBetween(filter: String): LiveData<MutableList<Values>> {
+        getBetween = repository.getBetween(filter).asLiveData()
+        return getBetween
+    }
 
     ///insert values(saved) into db
     public fun insertSavedValue(savedValues: SavedValues)
@@ -65,6 +81,8 @@ class MainViewModel(application: Application) : ViewModel() {
         val valuesDao = ValuesDB.getDatabase(application).ValuesDao()
         repository = ValuesRepository(valuesDao)
         getAllValues = repository.getAllValues.asLiveData()
+        getByMonth = repository.getByMonth.asLiveData()
+        getByWeek = repository.getByWeek.asLiveData()
 
         val savedValuesDao = ValuesDB.getDatabase(application).SavedValuesDao()
         savedRepository = SavedValuesRepository(savedValuesDao)
@@ -84,6 +102,7 @@ class MainViewModel(application: Application) : ViewModel() {
         if (isFirstStart() == true){
             firstStart()
         }
+//        firstStart()
 
         var time = System.currentTimeMillis().toInt()
         if ((time - oldTime)>300000){

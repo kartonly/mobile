@@ -8,15 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lesson1s2.data.database.Values
 import com.example.lesson1s2.databinding.ItemHistoryBinding
 import com.google.android.material.snackbar.Snackbar
+import java.text.SimpleDateFormat
+import java.time.LocalDate
 
-class HistoryAdapter(private val values: MutableList<Values>, private val filter: String) : RecyclerView.Adapter<HistoryAdapter.HistoryHolder>(){
+class HistoryAdapter(private val values: MutableList<Values>) : RecyclerView.Adapter<HistoryAdapter.HistoryHolder>(){
     val no = "no"
     inner class HistoryHolder internal constructor(private val binding: ItemHistoryBinding): RecyclerView.ViewHolder(binding.root)
     {
         fun bind(history: Values) = binding.run{
             cut.text = history.value+" по курсу "+history.cost
             valueName.text = "Итого:"+history.finalCost
-            date.text = history.date
+            var date1 = java.text.SimpleDateFormat("yyyy-MM-dd").format(history.date)
+            date.text = date1
         }
     }
 
@@ -33,14 +36,7 @@ class HistoryAdapter(private val values: MutableList<Values>, private val filter
     override fun onBindViewHolder(holder: HistoryHolder, position: Int) {
         val histories: MutableList<Values> = values
         val history = histories[position]
-        if (filter == no){
-            holder.bind(history)
-        } else {
-            val month: String
-            month = history.date[5].toString()+history.date[6].toString()
-
-            if (month == filter){ holder.bind(history) }
-        }
+        holder.bind(history)
     }
 
 }

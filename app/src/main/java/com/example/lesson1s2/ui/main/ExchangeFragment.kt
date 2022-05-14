@@ -1,5 +1,6 @@
 package com.example.lesson1s2.ui.main
 
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
 import com.example.lesson1s2.data.database.Values
+import java.sql.Date
 import java.sql.Timestamp
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.util.*
 
 
 class ExchangeFragment(private var viewModel: MainViewModel, private val value: String, private val currency: Double): Fragment() {
@@ -49,7 +53,8 @@ class ExchangeFragment(private var viewModel: MainViewModel, private val value: 
 
         binding.button2.setOnClickListener{
             val id = System.currentTimeMillis().toInt()
-            val values = Values(id, value, currency, final, LocalDate.now().toString())
+
+            val values = Values(id, value, currency, final, System.currentTimeMillis())
 
             insertValueInDB(viewModel, values)
             val toast: Toast = Toast.makeText(context, "Вы купили валюту!", Toast.LENGTH_LONG)

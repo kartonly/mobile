@@ -11,7 +11,7 @@ import com.example.lesson1s2.R
 import com.example.lesson1s2.data.asyncData.HistoryAdapter
 import com.example.lesson1s2.databinding.HistoryFragmentBinding
 
-class HistoryFragment(private var viewModel: MainViewModel, private val date: String): Fragment() {
+class HistoryFragment(private var viewModel: MainViewModel, val filter: String): Fragment() {
     private lateinit var binding: HistoryFragmentBinding
 
     private val verticalLinearLayoutManager: LinearLayoutManager =
@@ -35,10 +35,22 @@ class HistoryFragment(private var viewModel: MainViewModel, private val date: St
 
     fun setupRecycleView() {
         binding.card.layoutManager = verticalLinearLayoutManager
-        val values = viewModel.getAllValues
-
-        viewModel.getAllValues.observe(viewLifecycleOwner) { values ->
-            binding.card.adapter = HistoryAdapter(values, date) }
-
+        val str = filter[0].toString()
+        if (filter == "no"){
+            viewModel.getAllValues.observe(viewLifecycleOwner) { values ->
+                binding.card.adapter = HistoryAdapter(values) }
+        } else if (filter == "m"){
+            viewModel.getByMonth.observe(viewLifecycleOwner) { values ->
+                binding.card.adapter = HistoryAdapter(values) }
+        } else if (filter == "w"){
+            viewModel.getByWeek.observe(viewLifecycleOwner) { values ->
+                binding.card.adapter = HistoryAdapter(values) }
+        } else if (str == "d"){
+            viewModel.getBetween(filter).observe(viewLifecycleOwner) { values ->
+                binding.card.adapter = HistoryAdapter(values) }
+        } else {
+            viewModel.getByValue(filter).observe(viewLifecycleOwner){
+                    values -> binding.card.adapter = HistoryAdapter(values) }
+        }
     }
 }

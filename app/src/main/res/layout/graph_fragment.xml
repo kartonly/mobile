@@ -19,5 +19,27 @@
         android:textColor="@color/greyL"
         android:text="@string/rise"
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="@dimen/m18"
+        android:fitsSystemWindows="true"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+<!--        <com.github.mikephil.charting.charts.LineChart-->
+<!--            android:id="@+id/lineChart"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:layout_marginStart="5dp"-->
+<!--            android:layout_marginEnd="5dp"-->
+<!--            android:padding="9dp"-->
+<!--            tools:replace="android:allowBackup"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" />-->
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

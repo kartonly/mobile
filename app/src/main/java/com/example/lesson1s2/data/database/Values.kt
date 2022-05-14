@@ -1,5 +1,6 @@
 package com.example.lesson1s2.data.database
 
+import android.text.format.DateFormat
 import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -12,7 +13,7 @@ data class Values(
     var value: String,
     val cost: Double,
     val finalCost: Double,
-    val date: String
+    val date: Long
 ){
     ///
 }
