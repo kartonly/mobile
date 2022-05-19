@@ -17,9 +17,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.sql.Time
 import java.time.LocalTime
+import java.util.*
 
 class MainViewModel(application: Application) : ViewModel() {
-    var oldTime = 0
+    var oldTime:Long = 0
     var prefs: SharedPreferences? = null
     var sharedEditor: SharedPreferences.Editor? = null
     public fun isFirstStart(): Boolean? {
@@ -98,20 +99,22 @@ class MainViewModel(application: Application) : ViewModel() {
 //        return valuesList
 //    }
 
-    suspend fun changeValues() {
+    suspend fun changeValues(): String {
         if (isFirstStart() == true){
             firstStart()
         }
 //        firstStart()
 
-        var time = System.currentTimeMillis().toInt()
-        if ((time - oldTime)>300000){
+        var time = Calendar.getInstance().timeInMillis
+        if ((time - oldTime)>3000){
+            Log.d("MY_TAG", time.toString())
             val rates = CurrencyHolder.getCur().toList()
             for (i in rates){
                 updateCost(i.first, i.second)
             }
             oldTime = time
         }
+        return time.toString()+"  "+oldTime.toString()
     }
 
     suspend fun firstStart(){

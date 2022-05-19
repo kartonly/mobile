@@ -1,6 +1,7 @@
 package com.example.lesson1s2.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,8 @@ class ValuesFragment(private var viewModel: MainViewModel): Fragment() {
         binding.card.layoutManager = verticalLinearLayoutManager
         val values = viewModel.getAllSavedValues
 
-        viewModel.changeValues()
+        var f = viewModel.changeValues()
+        Log.d("MY_TAG", f)
 
         viewModel.getAllSavedValues.observe(viewLifecycleOwner) { values ->
             binding.card.adapter = CurrencyAdapter(values, ::showSnackbarLike, ::showSnackbarVal) }

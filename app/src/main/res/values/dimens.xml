@@ -12,6 +12,7 @@
     <dimen name="m6">6dp</dimen>
     <dimen name="m10">10dp</dimen>
     <dimen name="m18">18dp</dimen>
+    <dimen name="m22">35dp</dimen>
 
     <dimen name="f28">28sp</dimen>
     <dimen name="f20">20sp</dimen>

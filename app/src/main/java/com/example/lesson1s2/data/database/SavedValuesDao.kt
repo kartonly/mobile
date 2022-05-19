@@ -20,7 +20,7 @@ interface SavedValuesDao {
     @Update
     suspend fun updateSavedValues(savedValues: SavedValues)
 
-    @Query("UPDATE `SavedValues` SET 'cost'=:cost WHERE 'value'=:value")
+    @Query("UPDATE `SavedValues` SET cost=:cost WHERE value=:value")
     fun updateCost(value: String, cost: Double)
 
 }

@@ -37,7 +37,7 @@ class MainFragment(private var viewModel: MainViewModel) : Fragment() {
         }
 
         binding.button3.setOnClickListener{
-            fragmentManager?.beginTransaction()?.replace(R.id.main_container, GraphFragment(), GraphFragment::class.java.simpleName)
+            fragmentManager?.beginTransaction()?.replace(R.id.main_container, GraphFragment(viewModel), GraphFragment::class.java.simpleName)
                 ?.commit()
         }
 
