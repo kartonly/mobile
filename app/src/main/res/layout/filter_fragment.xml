@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/dateOr"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:inputType="number"
+        android:inputType="date"
         android:layout_marginStart="@dimen/top16"
         android:hint="@string/start" />
 
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/edit_start"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:inputType="number"
+        android:inputType="date"
         android:layout_marginStart="@dimen/top16"
         android:hint="@string/end" />
 
@@ -87,5 +87,26 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:text="@string/choose" />
+
+    <EditText
+        android:id="@+id/edit_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/button4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:inputType="text"
+        android:layout_marginStart="@dimen/top16"
+        android:hint="@string/val" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/edit_value"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/choose_value" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

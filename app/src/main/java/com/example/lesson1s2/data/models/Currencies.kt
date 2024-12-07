@@ -1,5 +1,6 @@
 package com.example.lesson1s2.data.models
 
+import androidx.annotation.DrawableRes
 import java.util.*
 
 class Currencies(
@@ -9,7 +10,7 @@ class Currencies(
 )
 
 data class Currency(
-    val id: Int,
     val name: String,
-    val value: Double
+    val value: Double,
+    @DrawableRes var icon: Int
 )

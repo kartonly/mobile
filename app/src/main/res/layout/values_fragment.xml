@@ -28,8 +28,8 @@
         android:layout_marginBottom="@dimen/top16"
         android:paddingStart="@dimen/m8"
         android:paddingEnd="@dimen/m8"
-        tools:itemCount="5"
         tools:listitem="@layout/item"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,29 +17,40 @@
         tools:ignore="MissingConstraints"
         >
 
-
-        <Button
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/f12"
-            android:layout_marginTop="@dimen/m8"
-            android:layout_marginStart="@dimen/top16"
-            android:text=""
-            android:width="25dp"
-            android:height="10dp"
-            android:textColor="@color/white"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </Button>
-
-
-
         <TextView
             android:id="@+id/cut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/m18"
+            android:layout_marginStart="@dimen/top16"
+            android:layout_marginEnd="@dimen/top16"
+            android:textSize="@dimen/f16"
+            android:textColor="@color/greyL"
+            android:text=""
+            >
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/cut"
+            android:textSize="@dimen/f16"
+            android:textColor="@color/greyL"
+            android:text=""
+            >
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/value_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/date"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="@dimen/m18"
             android:layout_marginStart="@dimen/top16"
@@ -52,17 +63,6 @@
         </TextView>
 
 
-        <TextView
-            android:id="@+id/like"
-            android:layout_width="@dimen/top24"
-            android:layout_height="@dimen/top24"
-            android:layout_marginTop="@dimen/m6"
-            android:layout_marginEnd="@dimen/m12"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/cut"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck">
-
-        </TextView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

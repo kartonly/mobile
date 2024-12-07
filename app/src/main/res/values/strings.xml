@@ -4,6 +4,8 @@
     <string name="history">История</string>
     <string name="rise">Рост валют</string>
     <string name="val1">Введите кол-во</string>
+    <string name="one">1</string>
+    <string name="rub">RUB</string>
     <string name="exchange">Обменять</string>
     <string name="filter">Фильтры</string>
     <string name="date">Выберите период</string>
@@ -11,7 +13,9 @@
     <string name="week">Неделя</string>
     <string name="month">Месяц</string>
     <string name="date2">Введите период самостоятельно:</string>
-    <string name="start">Начало</string>
-    <string name="end">Конец</string>
+    <string name="start">дд-мм-гг</string>
+    <string name="end">дд-мм-гг</string>
+    <string name="val">Введите название валюты</string>
     <string name="choose">Выбрать</string>
+    <string name="choose_value">Выбрать валюту</string>
 </resources>

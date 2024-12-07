@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -56,4 +57,15 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
     implementation 'com.android.support:recyclerview-v7:31.0.0'
     implementation "android.arch.lifecycle:extensions:1.1.1"
+
+    implementation "androidx.room:room-runtime:2.4.0"
+    kapt "androidx.room:room-compiler:2.4.0"
+    annotationProcessor "androidx.room:room-compiler:2.4.0"
+
+    implementation "androidx.room:room-ktx:2.3.0"
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation "com.github.AnyChart:AnyChart-Android:1.1.2"
+
+    //charts
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

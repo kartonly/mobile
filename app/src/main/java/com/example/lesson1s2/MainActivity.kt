@@ -19,7 +19,9 @@ import kotlin.coroutines.CoroutineContext
 import okhttp3.OkHttpClient
 
 import okhttp3.logging.HttpLoggingInterceptor
-
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import com.example.lesson1s2.ui.main.MainViewModelFactory
 
 
 class MainActivity() : AppCompatActivity() {
@@ -28,12 +30,28 @@ class MainActivity() : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val provider = ViewModelProvider(this, MainViewModelFactory(application))[MainViewModel::class.java]
+        val mainFragment = MainFragment(provider)
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .replace(R.id.container, mainFragment)
                 .commitNow()
         }
-        val model = ViewModelProviders.of(this).get(MainViewModel::class.java).main()
+        onBackPressed()
+
+    }
+
+    private var back_pressed: Long = 0
+
+    override fun onBackPressed() {
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed()
+        } else {
+            Toast.makeText(baseContext, "Нажмите еще раз, чтобы выйти", Toast.LENGTH_SHORT).show()
+        }
+        back_pressed = System.currentTimeMillis()
     }
 
 }
